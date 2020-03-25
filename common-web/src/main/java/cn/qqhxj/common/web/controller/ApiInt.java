@@ -1,34 +1,12 @@
 package cn.qqhxj.common.web.controller;
 
-import cn.qqhxj.common.web.bean.Query;
-import cn.qqhxj.common.web.bean.Result;
+import cn.qqhxj.common.web.Query;
+import cn.qqhxj.common.web.Result;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
 import java.util.List;
 
-/**
- * 实体的增删改查接口
- *
- * @author han xinjian
- * @date 2019-08-03 19:09
- **/
-public interface ApiController<T> {
-
-    /**
-     * 查询一个
-     *
-     * @param t 参数
-     * @return
-     */
-    Result<T> getOne(T t);
-
-    /**
-     * 查询一个
-     *
-     * @param query query
-     * @return t
-     */
-    Result<T> queryOne(Query<T> query);
+public interface ApiInt<T> extends Api<T> {
 
     /**
      * 增加 实体
@@ -68,7 +46,7 @@ public interface ApiController<T> {
      * @param query 删除条件
      * @return result
      */
-    Result batchDel(Query<T> query);
+    Result batchDelQuery(Query<T> query);
 
     /**
      * 修改实体
@@ -92,7 +70,7 @@ public interface ApiController<T> {
      * @param query 修改条件
      * @return
      */
-    Result batchUpdate(Query<T> query);
+    Result batchUpdateQuery(Query<T> query);
 
 
     /**
@@ -155,6 +133,6 @@ public interface ApiController<T> {
      * @param query query
      * @return result
      */
-    Result<IPage<T>> page(Query<T> query);
+    Result<IPage<T>> pageQuery(Query<T> query);
 
 }
