@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.sun.istack.internal.NotNull;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -24,7 +23,7 @@ public interface BaseDao<T> extends BaseMapper<T> {
      * @return
      */
     @Select("${sql} ${ew.customSqlSegment}")
-    List<Map> query(@Param("sql") String sql, @NotNull @Param(Constants.WRAPPER) Wrapper wrapper);
+    List<Map> query(@Param("sql") String sql, @Param(Constants.WRAPPER) Wrapper wrapper);
 
     /**
      * @param sql
@@ -33,7 +32,7 @@ public interface BaseDao<T> extends BaseMapper<T> {
      * @param <E>
      * @return
      */
-    default <E> List<E> query(@NotNull @Param("sql") String sql, @NotNull @Param(Constants.WRAPPER) Wrapper wrapper, @NotNull Class<E> tClass) {
+    default <E> List<E> query(@Param("sql") String sql, @Param(Constants.WRAPPER) Wrapper wrapper, Class<E> tClass) {
         List<Map> maps = query(sql, wrapper);
         return maps.stream().map((item) -> {
             return JSONObject.parseObject(JSONObject.toJSONString(item), tClass);

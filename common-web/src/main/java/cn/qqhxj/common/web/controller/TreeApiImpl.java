@@ -1,9 +1,9 @@
 package cn.qqhxj.common.web.controller;
 
-import cn.qqhxj.common.web.Query;
-import cn.qqhxj.common.web.Result;
-import cn.qqhxj.common.web.TreeNode;
-import cn.qqhxj.common.web.TreeUtil;
+import cn.qqhxj.common.web.bean.Query;
+import cn.qqhxj.common.web.bean.Result;
+import cn.qqhxj.common.web.bean.TreeNode;
+import cn.qqhxj.common.web.util.TreeUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,6 @@ import java.util.List;
 
 public interface TreeApiImpl<T extends TreeNode<T>> extends ApiImpl<T>, TreeApiInt<T> {
     @GetMapping("/tree")
-    @Override
     default Result<List<T>> tree(@RequestParam(defaultValue = "*") String select, @RequestParam(required = false) Serializable pid) {
         QueryWrapper<T> queryWrapper = new QueryWrapper<>();
         queryWrapper.select(select);
@@ -25,8 +24,8 @@ public interface TreeApiImpl<T extends TreeNode<T>> extends ApiImpl<T>, TreeApiI
         return result(ts);
     }
 
-    @PostMapping("/treePageQuery")
     @Override
+    @PostMapping("/treePageQuery")
     default Result<IPage<T>> treePageQuery(@RequestBody Query<T> query) {
         query.setPageSize(-1);
         Result<IPage<T>> page = ApiImpl.super.pageQuery(query);

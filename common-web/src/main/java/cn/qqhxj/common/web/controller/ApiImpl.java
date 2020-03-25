@@ -1,7 +1,7 @@
 package cn.qqhxj.common.web.controller;
 
-import cn.qqhxj.common.web.Query;
-import cn.qqhxj.common.web.Result;
+import cn.qqhxj.common.web.bean.Query;
+import cn.qqhxj.common.web.bean.Result;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
@@ -16,6 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public interface ApiImpl<T> extends ApiInt<T> {
+
+
     default <A> Result<A> result(boolean flag, A data, String msg) {
         return flag ? Result.ok(data) : Result.err(msg);
     }
